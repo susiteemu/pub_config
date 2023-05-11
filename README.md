@@ -51,3 +51,16 @@ Make symlink from `~/repositories/pub_config/lazygit/config.yml` to `~/.config/l
 Make sure `~/.config/` is in `XDG_CONFIG_HOME`. Do this by adding the following export to your `fish` config:
 
 `set -gx XDG_CONFIG_HOME $HOME/.config`
+
+## jrnl
+
+### Installation
+
+`brew install jrnl`
+
+### Configuration
+
+Make symlink from `~/repositories/pub_config/jrnl/jrnl.yaml` to `~/.config/jrnl/jrnl.yaml`
+
+`ln -s ~/repositories/pub_config/jrnl/jrnl.yaml ~/.config/jrnl/jrnl.yaml`
+

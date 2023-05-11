@@ -17,6 +17,7 @@ gui:
     unstagedChangesColor:
       - red # Red
   showIcons: true
+  showRandomTip: false
 git:
   paging:
     colorArg: always
