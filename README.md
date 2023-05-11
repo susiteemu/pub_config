@@ -1,4 +1,4 @@
-# This repository contains all of my workstation public configurations
+# This repository contains all of my workstation's public configurations
 
 ## Installation
 
