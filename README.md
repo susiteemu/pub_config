@@ -14,6 +14,13 @@ Clone this repository into `~/repositories/pub_config`. If you do otherwise, cha
 
 See [Catppuccin's bat Github](https://github.com/catppuccin/bat)
 
+### Configuration
+
+Make symlink from `~/repositories/pub_config/bat/config` to `~/.config/bat/config`
+
+`ln -s ~/repositories/pub_config/bat/config ~/.config/bat/config`
+
+
 ## delta
 
 ### Pre-requirements
