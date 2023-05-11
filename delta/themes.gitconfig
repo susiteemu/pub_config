@@ -1,0 +1,24 @@
+[delta "felix-mocha"]
+    dark = true
+    file-added-label = [+]
+    file-copied-label = [C]
+    file-decoration-style = none
+    file-modified-label = [M]
+    file-removed-label = [-]
+    file-renamed-label = [R]
+    file-style = 232 bold 184
+    hunk-header-style = omit
+    line-numbers = true
+    line-numbers-left-style = "#45475a"
+    line-numbers-minus-style = "#f38ba8"
+    line-numbers-plus-style = "#a6e3a1"
+    line-numbers-right-style = "#45475a"
+    line-numbers-zero-style = "#cdd6f4"
+    minus-emph-style = bold syntax "#663845"
+    minus-style = syntax "#542d38"
+    plus-emph-style = bold syntax "#445f41"
+    plus-empty-line-marker-style = "#445f41"
+    plus-style = syntax "#374f35"
+    syntax-theme = Catppuccin-mocha
+    whitespace-error-style = "#f38ba8"
+    zero-style = syntax
