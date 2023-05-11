@@ -1,1 +1,20 @@
-/Users/u000278/repositories/configs/jrnl.yaml
+colors:
+  body: none
+  date: none
+  tags: none
+  title: none
+default_hour: 9
+default_minute: 0
+editor: /opt/homebrew/bin/nvim
+encrypt: false
+highlight: true
+indent_character: '|'
+journals:
+  default:
+    journal: ~/journal/
+    display_format: markdown
+linewrap: 100
+tagsymbols: '#@'
+template: false
+timeformat: '%F %a %R'
+version: v3.3
