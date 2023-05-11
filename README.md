@@ -1,5 +1,9 @@
 # This repository contains all of my workstation public configurations
 
+## Installation
+
+Clone this repository into `~/repositories/pub_config`. If you do otherwise, change the paths below to match your cup of tea!
+
 ## bat
 
 ### Installation
