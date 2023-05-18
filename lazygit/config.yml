@@ -22,3 +22,6 @@ git:
   paging:
     colorArg: always
     pager: delta --paging=never
+keybinding:
+  universal:
+    nextTab: '<c-t>'
