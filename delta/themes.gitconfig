@@ -6,7 +6,7 @@
     file-modified-label = [M]
     file-removed-label = [-]
     file-renamed-label = [R]
-    file-style = 232 bold 184
+    file-style = bold
     hunk-header-style = omit
     line-numbers = true
     line-numbers-left-style = "#45475a"

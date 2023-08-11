@@ -11,10 +11,10 @@ highlight: true
 indent_character: '|'
 journals:
   default:
-    journal: ~/journal/
     display_format: markdown
+    journal: ~/journal/
 linewrap: 100
 tagsymbols: '#@'
 template: false
 timeformat: '%F %a %R'
-version: v3.3
+version: v4.0
