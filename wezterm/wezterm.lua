@@ -8,7 +8,7 @@ end
 
 config.color_scheme = "Catppuccin Mocha"
 config.font = wezterm.font("VictorMono Nerd Font")
-config.font_size = 14.0
+config.font_size = 16.0
 config.harfbuzz_features = { "calt=1", "clig=1", "liga=1" }
 config.use_fancy_tab_bar = true
 config.hide_tab_bar_if_only_one_tab = false
@@ -45,8 +45,29 @@ config.window_decorations = "RESIZE"
 config.window_frame = {
 	active_titlebar_bg = "#313244",
 	inactive_titlebar_bg = "#313244",
-	font_size = 13,
+	font_size = 14,
 	font = wezterm.font("VictorMono Nerd Font"),
+}
+
+config.mouse_bindings = {
+	-- Disable the default click behavior
+	{
+		event = { Up = { streak = 1, button = "Left" } },
+		mods = "NONE",
+		action = wezterm.action.DisableDefaultAssignment,
+	},
+	-- Ctrl-click will open the link under the mouse cursor
+	{
+		event = { Up = { streak = 1, button = "Left" } },
+		mods = "CTRL",
+		action = wezterm.action.OpenLinkAtMouseCursor,
+	},
+	-- Disable the Ctrl-click down event to stop programs from seeing it when a URL is clicked
+	{
+		event = { Down = { streak = 1, button = "Left" } },
+		mods = "CTRL",
+		action = wezterm.action.Nop,
+	},
 }
 
 config.keys = {
@@ -79,7 +100,7 @@ config.keys = {
 	{ key = "l", mods = "CMD", action = act.ActivatePaneDirection("Right") },
 	{ key = "t", mods = "CMD", action = act.SpawnTab("CurrentPaneDomain") },
 	{ key = "t", mods = "CMD|SHIFT", action = act.ShowTabNavigator },
-	{ key = "w", mods = "CMD", action = act.CloseCurrentTab({ confirm = false }) },
+	{ key = "w", mods = "CMD", action = act.CloseCurrentTab({ confirm = true }) },
 	{ key = "x", mods = "CMD", action = act.CloseCurrentPane({ confirm = false }) },
 	{ key = "b", mods = "LEADER|CTRL", action = act.SendString("\x02") },
 	{ key = "Enter", mods = "LEADER", action = act.ActivateCopyMode },
@@ -122,5 +143,16 @@ config.keys = {
 		}),
 	},
 }
+
+config.skip_close_confirmation_for_processes_named = {}
+
+for i = 1, 8 do
+	-- CTRL+ALT + number to move to that position
+	table.insert(config.keys, {
+		key = tostring(i),
+		mods = "CTRL|ALT",
+		action = wezterm.action.MoveTab(i - 1),
+	})
+end
 
 return config

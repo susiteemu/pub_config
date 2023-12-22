@@ -17,4 +17,4 @@ linewrap: 100
 tagsymbols: '#@'
 template: false
 timeformat: '%F %a %R'
-version: v4.0
+version: v4.1
