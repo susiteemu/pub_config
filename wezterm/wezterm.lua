@@ -7,10 +7,10 @@ if wezterm.config_builder then
 end
 
 config.color_scheme = "Catppuccin Mocha"
-config.font = wezterm.font("VictorMono Nerd Font")
-config.font_size = 16.0
+config.font = wezterm.font("Victor Mono Nerd Font")
+config.font_size = 15.0
 config.harfbuzz_features = { "calt=1", "clig=1", "liga=1" }
-config.use_fancy_tab_bar = true
+--config.use_fancy_tab_bar = true
 config.hide_tab_bar_if_only_one_tab = false
 config.colors = {
 	tab_bar = {
@@ -40,13 +40,13 @@ config.colors = {
 
 config.send_composed_key_when_left_alt_is_pressed = true
 config.send_composed_key_when_right_alt_is_pressed = true
-config.window_decorations = "RESIZE"
+--config.window_decorations = "TITLE"
 
 config.window_frame = {
 	active_titlebar_bg = "#313244",
 	inactive_titlebar_bg = "#313244",
 	font_size = 14,
-	font = wezterm.font("VictorMono Nerd Font"),
+	font = wezterm.font("VictorMono"),
 }
 
 config.mouse_bindings = {
@@ -137,7 +137,7 @@ config.keys = {
 				TERM = "screen-256color",
 			},
 			args = {
-				"/opt/homebrew/bin/nvim",
+				"/usr/bin/nvim",
 				os.getenv("WEZTERM_CONFIG_FILE"),
 			},
 		}),
