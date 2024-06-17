@@ -7,17 +7,20 @@ if wezterm.config_builder then
 end
 
 config.color_scheme = "Catppuccin Mocha"
-config.font = wezterm.font("VictorMono Nerd Font")
+--config.font = wezterm.font("VictorMono Nerd Font", { weight = 'DemiBold' })
+config.font = wezterm.font("Hack FC Ligatured CCG", { weight = "Regular" })
+
 config.font_size = 16.0
-config.harfbuzz_features = { "calt=1", "clig=1", "liga=1" }
+--config.harfbuzz_features = { "calt=1", "clig=1", "liga=1" }
+config.tab_bar_at_bottom = true
 config.use_fancy_tab_bar = true
 config.hide_tab_bar_if_only_one_tab = false
 config.colors = {
 	tab_bar = {
 		background = "#313244",
 		active_tab = {
-			bg_color = "#1e1e2e",
-			fg_color = "#cdd6f4",
+			fg_color = "#bac2de",
+			bg_color = "#313244",
 		},
 		inactive_tab = {
 			bg_color = "#313244",
@@ -45,9 +48,48 @@ config.window_decorations = "RESIZE"
 config.window_frame = {
 	active_titlebar_bg = "#313244",
 	inactive_titlebar_bg = "#313244",
-	font_size = 14,
-	font = wezterm.font("VictorMono Nerd Font"),
+	font_size = 19,
+	font = wezterm.font("Hack FC Ligatured CCG", { weight = "Bold" }),
 }
+
+-- Equivalent to POSIX basename(3)
+-- Given "/foo/bar" returns "bar"
+-- Given "c:\\foo\\bar" returns "bar"
+function basename(s)
+	return string.gsub(s, "(.*[/\\])(.*)", "%2")
+end
+
+function tab_title(tab_info)
+	local title = tab_info.tab_title
+	-- if the tab title is explicitly set, take that
+	if title and #title > 0 then
+		if tab_info.is_active then
+			return string.format("[%d]: %s", tab_info.tab_index + 1, title)
+		else
+			return string.format("%d: %s", tab_info.tab_index + 1, title)
+		end
+	end
+	local process_name = tab_info.active_pane.foreground_process_name
+	if process_name and #process_name > 0 then
+		if tab_info.is_active then
+			return string.format("[%d]: %s", tab_info.tab_index + 1, basename(process_name))
+		else
+			return string.format("%d: %s", tab_info.tab_index + 1, basename(process_name))
+		end
+	end
+	-- Otherwise, use the title from the active pane
+	-- in that tab
+	if tab_info.is_active then
+		return tab_info.active_pane.title
+	else
+		return tab_info.active_pane.title
+	end
+end
+
+wezterm.on("format-tab-title", function(tab, tabs, panes, cfg, hover, max_width)
+	local title = tab_title(tab)
+	return title
+end)
 
 config.mouse_bindings = {
 	-- Disable the default click behavior
@@ -88,8 +130,8 @@ config.keys = {
 		action = act.CharSelect({ copy_on_select = true, copy_to = "ClipboardAndPrimarySelection" }),
 	},
 	{ key = "v", mods = "CMD", action = act.PasteFrom("Clipboard") },
-	{ key = "PageUp", mods = "CTRL", action = act.ActivateTabRelative(-1) },
-	{ key = "PageDown", mods = "CTRL", action = act.ActivateTabRelative(1) },
+	{ key = "PageUp", mods = "SHIFT", action = act.ScrollByPage(-1) },
+	{ key = "PageDown", mods = "SHIFT", action = act.ScrollByPage(1) },
 	{ key = "LeftArrow", mods = "SHIFT|CTRL", action = act.ActivatePaneDirection("Left") },
 	{ key = "RightArrow", mods = "SHIFT|CTRL", action = act.ActivatePaneDirection("Right") },
 	{ key = "UpArrow", mods = "SHIFT|CTRL", action = act.ActivatePaneDirection("Up") },
@@ -124,6 +166,27 @@ config.keys = {
 				-- Or the actual line of text they wrote
 				if line then
 					window:active_tab():set_title(line)
+				end
+			end),
+		}),
+	},
+	{
+		key = "T",
+		mods = "CMD|SHIFT",
+		action = act.PromptInputLine({
+			description = "Enter name for theme",
+			action = wezterm.action_callback(function(window, _, line)
+				-- line will be `nil` if they hit escape without entering anything
+				-- An empty string if they just hit enter
+				-- Or the actual line of text they wrote
+				if line then
+					local overrides = window:get_config_overrides() or {}
+					if not overrides.color_scheme then
+						overrides.color_scheme = line
+					else
+						overrides.color_scheme = nil
+					end
+					window:set_config_overrides(overrides)
 				end
 			end),
 		}),

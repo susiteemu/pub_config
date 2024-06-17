@@ -25,3 +25,5 @@ git:
 keybinding:
   universal:
     nextTab: '<c-t>'
+os:
+  editPreset: nvim
